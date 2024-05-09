@@ -6,7 +6,7 @@ public class Customer {
 
     private String name;
 
-    private Adress adress;
+    private Address adress;
 
     private String cpf;
 
@@ -16,7 +16,7 @@ public class Customer {
         this.isValidCpf = false;
     }
 
-    public Customer(String id, String name, Adress adress, String cpf, Boolean isValidCpf) {
+    public Customer(String id, String name, Address adress, String cpf, Boolean isValidCpf) {
         this.id = id;
         this.name = name;
         this.adress = adress;
@@ -40,11 +40,11 @@ public class Customer {
         this.name = name;
     }
 
-    public Adress getAdress() {
+    public Address getAdress() {
         return adress;
     }
 
-    public void setAdress(Adress adress) {
+    public void setAdress(Address adress) {
         this.adress = adress;
     }
 
