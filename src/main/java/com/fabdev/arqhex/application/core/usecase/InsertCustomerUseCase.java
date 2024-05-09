@@ -18,7 +18,7 @@ public class InsertCustomerUseCase {
 
     public void insert(Customer customer, String zipCode) {
         var address = findAddressByZipCodeOutputPort.find(zipCode);
-        customer.setAdress(address);
+        customer.setAddress(address);
         insertCustomerOutputPort.insert(customer);
     }
 }
