@@ -2,10 +2,11 @@ package com.fabdev.arqhex.application.core.usecase;
 
 import com.fabdev.arqhex.application.core.domain.Customer;
 import com.fabdev.arqhex.application.ports.in.FindCustomerByIdInputPort;
+import com.fabdev.arqhex.application.ports.in.UpdateCustomerInputPort;
 import com.fabdev.arqhex.application.ports.out.FindAddressByZipCodeOutputPort;
 import com.fabdev.arqhex.application.ports.out.UpdateCustomerOutputPort;
 
-public class UpdateCustomerUseCase {
+public class UpdateCustomerUseCase implements UpdateCustomerInputPort {
 
     private final FindCustomerByIdInputPort findCustomerByIdInputPort;
     private final FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort;
@@ -21,6 +22,7 @@ public class UpdateCustomerUseCase {
         this.updateCustomerOutputPort = updateCustomerOutputPort;
     }
 
+    @Override
     public void update(Customer customer, String zipCode) {
         findCustomerByIdInputPort.find(customer.getId());
         var address = findAddressByZipCodeOutputPort.find(zipCode);

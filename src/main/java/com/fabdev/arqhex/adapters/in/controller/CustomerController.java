@@ -3,8 +3,10 @@ package com.fabdev.arqhex.adapters.in.controller;
 import com.fabdev.arqhex.adapters.in.controller.mapper.CustomerMapper;
 import com.fabdev.arqhex.adapters.in.controller.request.CustomerRequest;
 import com.fabdev.arqhex.adapters.in.controller.response.CustomerResponse;
+import com.fabdev.arqhex.application.core.domain.Customer;
 import com.fabdev.arqhex.application.ports.in.FindCustomerByIdInputPort;
 import com.fabdev.arqhex.application.ports.in.InsertCustomerInputPort;
+import com.fabdev.arqhex.application.ports.in.UpdateCustomerInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,9 @@ public class CustomerController {
 
     @Autowired
     private FindCustomerByIdInputPort findCustomerByIdInputPort;
+
+    @Autowired
+    private UpdateCustomerInputPort updateCustomerInputPort;
 
     @Autowired
     private CustomerMapper customerMapper;
@@ -38,5 +43,14 @@ public class CustomerController {
         var customerResponse = customerMapper.toCustomerResponse(customer);
         return ResponseEntity.ok().body(customerResponse);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable final String id, @Valid @RequestBody CustomerRequest customerRequest) {
+        Customer customer = customerMapper.toCustomer(customerRequest);
+        customer.setId(id);
+        updateCustomerInputPort.update(customer, customerRequest.getZipCode());
+        return ResponseEntity.noContent().build();
+    }
+
 
 }
