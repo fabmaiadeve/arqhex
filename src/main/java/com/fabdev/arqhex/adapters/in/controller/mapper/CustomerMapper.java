@@ -1,6 +1,7 @@
 package com.fabdev.arqhex.adapters.in.controller.mapper;
 
 import com.fabdev.arqhex.adapters.in.controller.request.CustomerRequest;
+import com.fabdev.arqhex.adapters.in.controller.response.CustomerResponse;
 import com.fabdev.arqhex.application.core.domain.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,4 +13,5 @@ public interface CustomerMapper {
     @Mapping(target = "address", ignore = true)
     @Mapping(target = "isValidCpf", ignore = true)
     Customer toCustomer(CustomerRequest customerRequest);
+    CustomerResponse toCustomerResponse(Customer customer);
 }
