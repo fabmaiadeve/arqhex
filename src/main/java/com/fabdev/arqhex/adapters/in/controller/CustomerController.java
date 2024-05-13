@@ -4,6 +4,7 @@ import com.fabdev.arqhex.adapters.in.controller.mapper.CustomerMapper;
 import com.fabdev.arqhex.adapters.in.controller.request.CustomerRequest;
 import com.fabdev.arqhex.adapters.in.controller.response.CustomerResponse;
 import com.fabdev.arqhex.application.core.domain.Customer;
+import com.fabdev.arqhex.application.ports.in.DeleteCustomerByIdInputPort;
 import com.fabdev.arqhex.application.ports.in.FindCustomerByIdInputPort;
 import com.fabdev.arqhex.application.ports.in.InsertCustomerInputPort;
 import com.fabdev.arqhex.application.ports.in.UpdateCustomerInputPort;
@@ -25,6 +26,9 @@ public class CustomerController {
 
     @Autowired
     private UpdateCustomerInputPort updateCustomerInputPort;
+
+    @Autowired
+    private DeleteCustomerByIdInputPort deleteCustomerByIdInputPort;
 
     @Autowired
     private CustomerMapper customerMapper;
@@ -52,5 +56,9 @@ public class CustomerController {
         return ResponseEntity.noContent().build();
     }
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable final String id) {
+        deleteCustomerByIdInputPort.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
